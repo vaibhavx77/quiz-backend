@@ -1,15 +1,16 @@
+const dotenv = require("dotenv")
+dotenv.config()
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const PlayerModel = require("./models/player")
-const DB_KEY = process.env.DB_KEY
 const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-mongoose.connect(`mongodb+srv://vaibhavhome88:2uLwd2YIgT7GH5fO@cluster0.b0qhzd2.mongodb.net/players?retryWrites=true&w=majority`)
+mongoose.connect(process.env.URI)
 
 app.get("/allPlayers", (req,res) =>{
     PlayerModel.find()
